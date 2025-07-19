@@ -55,22 +55,12 @@ open index.html
 git clone https://github.com/mtclare/Storm-Machine.git
 cd Storm-Machine
 
-# Create sounds directory
-mkdir sounds
+# Audio files are now included! No additional setup needed.
+# For local development with enhanced debugging:
+node server.js
 
-# Download audio files (see download-sounds.html for links)
-# Organize files as:
-# sounds/
-# ├── wind-loop.mp3
-# ├── rain-loop.mp3
-# ├── thunder-1.mp3
-# ├── thunder-2.mp3
-# ├── thunder-3.mp3
-# ├── lightning-1.mp3
-# └── lightning-2.mp3
-
-# Open in browser
-open index.html
+# Then open http://localhost:3000
+# Or simply open index.html directly in browser
 ```
 
 ## 🎵 Audio Sources
@@ -83,12 +73,10 @@ The app supports both synthesized and realistic audio:
 - Perfect for testing and development
 
 ### 🎧 Realistic Audio (Enhanced)
-- Download free storm sounds from included guide (`download-sounds.html`)
-- Recommended sources:
-  - **🎵 Mixkit** - Free thunder and rain sounds
-  - **🎵 Freesound.org** - Creative Commons recordings
-  - **🎵 BBC Sound Effects** - Professional archive
-  - **🎵 Pixabay** - Royalty-free sounds
+- **Included audio samples** - High-quality storm sounds ready to use
+- **Enhanced debugging** - Detailed logging for audio loading and playback
+- **Development tools** - Debug interface (`debug.html`) for testing
+- **Local server** - `server.js` for CORS-free local development
 
 ## 🎮 Usage
 
@@ -134,8 +122,18 @@ Storm-Machine/
 ├── 🎨 styles.css                 # Complete styling
 ├── ⚡ app.js                     # UI controller
 ├── 🔊 audio-engine.js            # Original synthesis engine
-├── 🎵 audio-engine-samples.js    # Enhanced audio engine
+├── 🎵 audio-engine-samples.js    # Enhanced audio engine with debugging
 ├── 📥 download-sounds.html       # Audio download guide
+├── 🛠️ debug.html                 # Audio debugging interface
+├── 🖥️ server.js                  # Development server for local testing
+├── 📁 sounds/                    # Audio sample files
+│   ├── 🌬️ wind-loop.mp3         # Wind sound loop
+│   ├── 🌧️ rain-loop.mp3         # Rain sound loop
+│   ├── ⚡ thunder-1.mp3          # Thunder variation 1
+│   ├── ⚡ thunder-2.mp3          # Thunder variation 2
+│   ├── ⚡ thunder-3.mp3          # Thunder variation 3
+│   ├── 🌩️ lightning-1.mp3       # Lightning variation 1
+│   └── 🌩️ lightning-2.mp3       # Lightning variation 2
 ├── 📚 CLAUDE.md                  # Development guidance
 └── 📖 README.md                  # This file
 ```
@@ -146,6 +144,7 @@ Storm-Machine/
 1. Place audio files in the `sounds/` directory
 2. Update file paths in `audio-engine-samples.js`
 3. Modify the `audioFiles` object with your file names
+4. Use `debug.html` to test audio loading and playback
 
 ### Styling Changes
 - Edit CSS variables in `:root` for color scheme
