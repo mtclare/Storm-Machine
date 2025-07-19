@@ -12,23 +12,21 @@ class StormAudioEngine {
         this.analyser = null;
         this.frequencyData = null;
         
-        // Audio file URLs - replace these with your downloaded files
+        // Local audio files
         this.audioFiles = {
             wind: [
-                'https://www.soundjay.com/misc/sounds/wind-1.mp3', // Replace with local file
-                'sounds/wind-loop.mp3' // Local file example
+                'sounds/wind-loop.mp3'
             ],
             rain: [
-                'https://www.soundjay.com/rain/sounds/rain-1.mp3', // Replace with local file
-                'sounds/rain-loop.mp3' // Local file example
+                'sounds/rain-loop.mp3'
             ],
             thunder: [
-                'sounds/thunder-1.mp3', // Local files
+                'sounds/thunder-1.mp3',
                 'sounds/thunder-2.mp3',
                 'sounds/thunder-3.mp3'
             ],
             lightning: [
-                'sounds/lightning-1.mp3', // Local files
+                'sounds/lightning-1.mp3',
                 'sounds/lightning-2.mp3'
             ]
         };
@@ -64,43 +62,78 @@ class StormAudioEngine {
     }
 
     async loadAudioFiles() {
-        console.log('Loading audio files...');
+        console.log('=== LOADING AUDIO FILES ===');
+        console.log('Audio files configuration:', this.audioFiles);
         
         for (const [soundType, urls] of Object.entries(this.audioFiles)) {
+            console.log(`\n--- Loading ${soundType} sounds ---`);
+            
             if (soundType === 'thunder' || soundType === 'lightning') {
                 // Load multiple variations for random effects
                 this.sounds[soundType].buffers = [];
                 for (const url of urls) {
+                    console.log(`Attempting to load: ${url}`);
                     try {
                         const buffer = await this.loadAudioBuffer(url);
                         this.sounds[soundType].buffers.push(buffer);
+                        console.log(`✅ Successfully loaded: ${url}`);
                     } catch (error) {
-                        console.warn(`Failed to load ${soundType} file ${url}:`, error);
+                        console.error(`❌ Failed to load ${soundType} file ${url}:`, error);
                     }
                 }
+                console.log(`${soundType} loaded ${this.sounds[soundType].buffers.length} of ${urls.length} files`);
             } else {
                 // Load primary looping sound
+                const url = urls[0];
+                console.log(`Attempting to load looping sound: ${url}`);
                 try {
-                    const buffer = await this.loadAudioBuffer(urls[0]);
+                    const buffer = await this.loadAudioBuffer(url);
                     this.sounds[soundType].buffer = buffer;
+                    console.log(`✅ Successfully loaded looping sound: ${url}`);
                 } catch (error) {
-                    console.warn(`Failed to load ${soundType} file:`, error);
+                    console.error(`❌ Failed to load ${soundType} file ${url}:`, error);
+                    console.log(`🔄 Creating fallback synthesized sound for ${soundType}`);
                     // Fallback to synthesized sound if file loading fails
                     this.sounds[soundType].buffer = this.createFallbackSound(soundType);
                 }
             }
         }
         
-        console.log('Audio files loaded successfully');
+        console.log('=== AUDIO LOADING COMPLETE ===');
+        
+        // Summary of what was loaded
+        for (const [soundType, soundData] of Object.entries(this.sounds)) {
+            if (soundType === 'thunder' || soundType === 'lightning') {
+                console.log(`${soundType}: ${soundData.buffers?.length || 0} variations loaded`);
+            } else {
+                const hasRealAudio = soundData.buffer && soundData.buffer !== this.createFallbackSound(soundType);
+                console.log(`${soundType}: ${hasRealAudio ? 'REAL AUDIO' : 'SYNTHESIZED FALLBACK'}`);
+            }
+        }
     }
 
     async loadAudioBuffer(url) {
-        const response = await fetch(url);
-        if (!response.ok) {
-            throw new Error(`Failed to fetch audio file: ${url}`);
+        console.log(`🔄 Fetching: ${url}`);
+        try {
+            const response = await fetch(url);
+            console.log(`📡 Response status: ${response.status} ${response.statusText}`);
+            console.log(`📡 Response headers:`, Object.fromEntries(response.headers.entries()));
+            
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
+            
+            const arrayBuffer = await response.arrayBuffer();
+            console.log(`📦 Array buffer size: ${arrayBuffer.byteLength} bytes`);
+            
+            const audioBuffer = await this.audioContext.decodeAudioData(arrayBuffer);
+            console.log(`🎵 Audio decoded - Duration: ${audioBuffer.duration}s, Channels: ${audioBuffer.numberOfChannels}, Sample Rate: ${audioBuffer.sampleRate}Hz`);
+            
+            return audioBuffer;
+        } catch (error) {
+            console.error(`💥 Error loading ${url}:`, error);
+            throw error;
         }
-        const arrayBuffer = await response.arrayBuffer();
-        return await this.audioContext.decodeAudioData(arrayBuffer);
     }
 
     createFallbackSound(soundType) {

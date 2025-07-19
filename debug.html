@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio Debug Test</title>
+</head>
+<body>
+    <h1>Audio File Debug Test</h1>
+    <button id="test-btn">Test Audio File Loading</button>
+    <div id="results"></div>
+
+    <script>
+        document.getElementById('test-btn').addEventListener('click', async () => {
+            const results = document.getElementById('results');
+            results.innerHTML = '<h2>Testing audio files...</h2>';
+            
+            const audioFiles = [
+                'sounds/wind-loop.mp3',
+                'sounds/rain-loop.mp3',
+                'sounds/thunder-1.mp3',
+                'sounds/lightning-1.mp3'
+            ];
+            
+            for (const file of audioFiles) {
+                const div = document.createElement('div');
+                div.innerHTML = `<strong>${file}:</strong> `;
+                
+                try {
+                    console.log(`Testing: ${file}`);
+                    const response = await fetch(file);
+                    console.log(`Response:`, response);
+                    
+                    if (response.ok) {
+                        const size = response.headers.get('content-length');
+                        div.innerHTML += `✅ SUCCESS (${size} bytes)`;
+                        div.style.color = 'green';
+                    } else {
+                        div.innerHTML += `❌ HTTP ${response.status}: ${response.statusText}`;
+                        div.style.color = 'red';
+                    }
+                } catch (error) {
+                    console.error(`Error with ${file}:`, error);
+                    div.innerHTML += `💥 ERROR: ${error.message}`;
+                    div.style.color = 'red';
+                }
+                
+                results.appendChild(div);
+            }
+        });
+    </script>
+</body>
+</html>
