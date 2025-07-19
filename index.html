@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Storm Sounds - Atmospheric Audio Experience</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <header class="header">
+            <h1 class="logo">
+                <span class="storm-icon">⛈️</span>
+                STORM SOUNDS
+            </h1>
+            <p class="tagline">Create Your Perfect Storm</p>
+        </header>
+
+        <main class="controls-container">
+            <div class="control-grid">
+                <div class="control-panel" data-sound="wind">
+                    <div class="dial-container">
+                        <div class="dial" data-sound="wind">
+                            <div class="dial-inner">
+                                <div class="dial-pointer"></div>
+                                <div class="dial-center">
+                                    <span class="icon">💨</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dial-track"></div>
+                    </div>
+                    <div class="control-info">
+                        <h3>Wind</h3>
+                        <span class="value" id="wind-value">0%</span>
+                    </div>
+                </div>
+
+                <div class="control-panel" data-sound="rain">
+                    <div class="dial-container">
+                        <div class="dial" data-sound="rain">
+                            <div class="dial-inner">
+                                <div class="dial-pointer"></div>
+                                <div class="dial-center">
+                                    <span class="icon">🌧️</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dial-track"></div>
+                    </div>
+                    <div class="control-info">
+                        <h3>Rain</h3>
+                        <span class="value" id="rain-value">0%</span>
+                    </div>
+                </div>
+
+                <div class="control-panel" data-sound="thunder">
+                    <div class="dial-container">
+                        <div class="dial" data-sound="thunder">
+                            <div class="dial-inner">
+                                <div class="dial-pointer"></div>
+                                <div class="dial-center">
+                                    <span class="icon">⚡</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dial-track"></div>
+                    </div>
+                    <div class="control-info">
+                        <h3>Thunder</h3>
+                        <span class="value" id="thunder-value">0%</span>
+                    </div>
+                </div>
+
+                <div class="control-panel" data-sound="lightning">
+                    <div class="dial-container">
+                        <div class="dial" data-sound="lightning">
+                            <div class="dial-inner">
+                                <div class="dial-pointer"></div>
+                                <div class="dial-center">
+                                    <span class="icon">🌩️</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dial-track"></div>
+                    </div>
+                    <div class="control-info">
+                        <h3>Lightning</h3>
+                        <span class="value" id="lightning-value">0%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="master-controls">
+                <button class="master-btn" id="play-pause-btn">
+                    <span class="btn-icon">▶️</span>
+                    <span class="btn-text">Start Storm</span>
+                </button>
+                
+                <div class="volume-control">
+                    <label for="master-volume">Master Volume</label>
+                    <input type="range" id="master-volume" min="0" max="100" value="50">
+                    <span id="volume-value">50%</span>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <div class="visualizer">
+                <canvas id="audio-visualizer" width="800" height="100"></canvas>
+            </div>
+        </footer>
+    </div>
+
+    <script src="audio-engine-samples.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Storm Sounds</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; line-height: 1.6; }
+        .source { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 8px; }
+        .source h3 { color: #333; margin-top: 0; }
+        .download-list { margin: 10px 0; }
+        .download-list li { margin: 5px 0; }
+        a { color: #0066cc; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .instructions { background: #f5f5f5; padding: 15px; border-radius: 8px; margin: 20px 0; }
+        .file-structure { background: #f9f9f9; padding: 10px; border-left: 4px solid #0066cc; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <h1>Storm Sounds Download Guide</h1>
+    
+    <div class="instructions">
+        <h3>Instructions:</h3>
+        <ol>
+            <li>Create a <code>sounds/</code> folder in your Storm App directory</li>
+            <li>Download audio files from the sources below</li>
+            <li>Rename them according to the file structure shown</li>
+            <li>Update your HTML to use <code>audio-engine-samples.js</code> instead of <code>audio-engine.js</code></li>
+        </ol>
+    </div>
+
+    <div class="file-structure">
+        <strong>Required File Structure:</strong><br>
+        <code>
+        Storm App/<br>
+        ├── sounds/<br>
+        │   ├── wind-loop.mp3<br>
+        │   ├── rain-loop.mp3<br>
+        │   ├── thunder-1.mp3<br>
+        │   ├── thunder-2.mp3<br>
+        │   ├── thunder-3.mp3<br>
+        │   ├── lightning-1.mp3<br>
+        │   └── lightning-2.mp3<br>
+        ├── index.html<br>
+        └── audio-engine-samples.js
+        </code>
+    </div>
+
+    <div class="source">
+        <h3>🎵 Mixkit (Easiest - No Registration)</h3>
+        <p><strong>Best for:</strong> Thunder and Rain sounds</p>
+        <ul class="download-list">
+            <li><a href="https://mixkit.co/free-sound-effects/thunder/" target="_blank">Thunder Sounds</a> - Download 2-3 different thunder clips</li>
+            <li><a href="https://mixkit.co/free-sound-effects/rain/" target="_blank">Rain Sounds</a> - Look for "rain loop" or "thunderstorm" sounds</li>
+        </ul>
+        <p><em>License: Free for commercial and personal use</em></p>
+    </div>
+
+    <div class="source">
+        <h3>🎵 Freesound.org (High Quality)</h3>
+        <p><strong>Best for:</strong> Professional quality storm sounds</p>
+        <ul class="download-list">
+            <li><a href="https://freesound.org/people/RHumphries/sounds/2523/" target="_blank">Thunder Storm by RHumphries</a> - 3:30 high-quality storm</li>
+            <li><a href="https://freesound.org/people/straget/sounds/527664/" target="_blank">Thunder by straget</a> - Sharp thunder crack</li>
+            <li><a href="https://freesound.org/people/dmcmeans/sounds/384980/" target="_blank">Thunder-rain by dmcmeans</a> - Complete storm recording</li>
+        </ul>
+        <p><em>License: Creative Commons (attribution required)</em></p>
+        <p><small>Note: Requires free account to download</small></p>
+    </div>
+
+    <div class="source">
+        <h3>🎵 BBC Sound Effects (Professional)</h3>
+        <p><strong>Best for:</strong> Broadcast quality sounds</p>
+        <ul class="download-list">
+            <li><a href="https://sound-effects.bbcrewind.co.uk/" target="_blank">BBC Sound Effects Archive</a> - Search for "storm", "rain", "thunder", "wind"</li>
+        </ul>
+        <p><em>License: Free for non-commercial use</em></p>
+    </div>
+
+    <div class="source">
+        <h3>🎵 Alternative Sources</h3>
+        <ul class="download-list">
+            <li><a href="https://pixabay.com/sound-effects/search/storm/" target="_blank">Pixabay Storm Sounds</a> - Royalty-free with MP3 downloads</li>
+            <li><a href="https://www.zapsplat.com/sound-effect-category/thunder/" target="_blank">ZapSplat Thunder</a> - Requires free registration</li>
+        </ul>
+    </div>
+
+    <div class="instructions">
+        <h3>Quick Setup:</h3>
+        <p>For immediate testing, you can use these placeholder URLs in the audio engine:</p>
+        <ul>
+            <li>Replace the file paths in <code>audio-engine-samples.js</code> with direct download URLs</li>
+            <li>Or use the fallback synthesis when files fail to load</li>
+        </ul>
+    </div>
+
+    <script>
+        // Log instructions to console for easy copying
+        console.log(`
+Storm Sounds Setup Instructions:
+
+1. Create sounds/ folder
+2. Download audio files from the links above
+3. Rename files to match the structure:
+   - wind-loop.mp3
+   - rain-loop.mp3  
+   - thunder-1.mp3, thunder-2.mp3, thunder-3.mp3
+   - lightning-1.mp3, lightning-2.mp3
+
+4. Update index.html script tag:
+   <script src="audio-engine-samples.js"></script>
+        `);
+    </script>
+</body>
+</html>
