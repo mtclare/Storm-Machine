@@ -12,22 +12,24 @@ class StormAudioEngine {
         this.analyser = null;
         this.frequencyData = null;
         
-        // Local audio files
+        // Local audio files - MP3 format
+        // Note: Wind and rain use the first file for looping, thunder/lightning use all files for variation
         this.audioFiles = {
             wind: [
-                'sounds/wind-loop.mp3'
+                'sounds/wind-loop.mp3'  // Primary looping wind sound
             ],
             rain: [
-                'sounds/rain-loop.mp3'
+                'sounds/rain-loop.mp3'  // Primary looping rain sound
             ],
             thunder: [
-                'sounds/thunder-1.mp3',
-                'sounds/thunder-2.mp3',
-                'sounds/thunder-3.mp3'
+                'sounds/thunder-1.wav',
+                'sounds/thunder-2.wav',
+                'sounds/thunder-3.wav'
             ],
             lightning: [
                 'sounds/lightning-1.mp3',
-                'sounds/lightning-2.mp3'
+                'sounds/lightning-2.mp3',
+                'sounds/lightning-3.mp3'
             ]
         };
     }
